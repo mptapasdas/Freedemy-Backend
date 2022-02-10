@@ -39,7 +39,7 @@ app.use(xss());
 
 app.get("/", (req, res) => {
     res.status(200).json({
-        msg: "jobs api",
+        msg: "Freedemy Courses",
     });
 });
 
