@@ -39,7 +39,7 @@ app.use(helmet());
 app.use(cors());
 app.use(xss());
 
-app.get("/", (req, res) => {
+app.get("/swagger.json", (req, res) => {
     res.status(200).json(openapi);
 });
 
