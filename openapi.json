@@ -1,0 +1,287 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Freedemy",
+        "contact": {},
+        "version": "1.0.0-oas3"
+    },
+    "servers": [
+        {
+            "url": "https://freedemy-courses.herokuapp.com/api/v1"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Auth",
+            "description": ""
+        },
+        {
+            "name": "Courses",
+            "description": ""
+        }
+    ],
+    "paths": {
+        "/courses": {
+            "get": {
+                "tags": ["Courses"],
+                "summary": "Get All Courses",
+                "operationId": "GetAllCourses",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "deprecated": false,
+                "security": []
+            }
+        },
+        "/favourites": {
+            "get": {
+                "tags": ["Courses"],
+                "summary": "Get All Favourite Courses",
+                "operationId": "GetAllFavouriteCourses",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": ["Courses"],
+                "summary": "Add A  Favourite Course",
+                "operationId": "AddAFavouriteCourse",
+                "parameters": [],
+                "requestBody": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AddAFavouriteCourseRequest"
+                            },
+                            "example": {
+                                "code": 14,
+                                "title": "Learn Ruby",
+                                "instructor": "Mike Dane",
+                                "description": "This course will give you a full introduction into all of the core concepts in ruby.",
+                                "imageurl": "https://i.ytimg.com/vi/CIe1DxrSrhs/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLDreAZoipdeSJjxccoRsyi5_0JU5g",
+                                "courseurl": "https://www.youtube.com/playlist?list=PLLAZ4kZ9dFpO90iMas70Tt4_wYjhLGkya",
+                                "tags": ["Ruby"]
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/favourites/{id}": {
+            "delete": {
+                "tags": ["Courses"],
+                "summary": "Remove A Favourite Course",
+                "operationId": "RemoveAFavouriteCourse",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "null"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/auth/register": {
+            "post": {
+                "tags": ["Auth"],
+                "summary": "Register User",
+                "operationId": "RegisterUser",
+                "parameters": [],
+                "requestBody": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RegisterUserRequest"
+                            },
+                            "example": {
+                                "name": "tapas",
+                                "email": "tapas@gmail.com",
+                                "password": "secret"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "deprecated": false,
+                "security": []
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "tags": ["Auth"],
+                "summary": "Login User",
+                "operationId": "LoginUser",
+                "parameters": [],
+                "requestBody": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginUserRequest"
+                            },
+                            "example": {
+                                "email": "tapas@gmail.com",
+                                "password": "secret"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "deprecated": false,
+                "security": []
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AddAFavouriteCourseRequest": {
+                "title": "AddAFavouriteCourseRequest",
+                "required": [
+                    "code",
+                    "courseurl",
+                    "description",
+                    "imageurl",
+                    "instructor",
+                    "tags",
+                    "title"
+                ],
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "instructor": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "imageurl": {
+                        "type": "string"
+                    },
+                    "courseurl": {
+                        "type": "string"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "description": "",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "example": {
+                    "code": 14,
+                    "title": "Learn Ruby",
+                    "instructor": "Mike Dane",
+                    "description": "This course will give you a full introduction into all of the core concepts in ruby.",
+                    "imageurl": "https://i.ytimg.com/vi/CIe1DxrSrhs/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLDreAZoipdeSJjxccoRsyi5_0JU5g",
+                    "courseurl": "https://www.youtube.com/playlist?list=PLLAZ4kZ9dFpO90iMas70Tt4_wYjhLGkya",
+                    "tags": ["Ruby"]
+                }
+            },
+            "LoginUserRequest": {
+                "title": "LoginUserRequest",
+                "required": ["email", "password"],
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "email": "tapas@gmail.com",
+                    "password": "secret"
+                }
+            },
+            "RegisterUserRequest": {
+                "title": "RegisterUserRequest",
+                "required": ["email", "name", "password"],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "name": "tapas",
+                    "email": "tapas@gmail.com",
+                    "password": "secret"
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearer": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    }
+}

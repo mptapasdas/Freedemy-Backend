@@ -1,6 +1,8 @@
 require("dotenv").config();
 require("express-async-errors");
 
+const openapi = require("./openapi.json");
+
 //extra security packages
 const helmet = require("helmet");
 const cors = require("cors");
@@ -38,9 +40,7 @@ app.use(cors());
 app.use(xss());
 
 app.get("/", (req, res) => {
-    res.status(200).json({
-        msg: "Freedemy Courses",
-    });
+    res.status(200).json(openapi);
 });
 
 // routes
