@@ -35,9 +35,9 @@ app.use(
     })
 );
 app.use(express.json());
-// app.use(helmet());
-// app.use(cors());
-// app.use(xss());
+app.use(helmet());
+app.use(cors());
+app.use(xss());
 
 app.get("/swagger.json", (req, res) => {
     res.status(200).json(openapi);
