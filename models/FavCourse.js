@@ -5,13 +5,11 @@ const FavCourseSchema = new mongoose.Schema(
         code: {
             type: Number,
             required: [true, "Please provide course code"],
-            unique: true,
         },
         title: {
             type: String,
             required: [true, "Please provide title"],
             maxlength: 50,
-            unique: true,
         },
         instructor: {
             type: String,
