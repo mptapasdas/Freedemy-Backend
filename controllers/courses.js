@@ -8,7 +8,7 @@ const createCourse = async (req, res) => {
 };
 
 const getAllCourses = async (req, res) => {
-    const allCourses = await Course.find({});
+    const allCourses = await Course.aggregate([{ $sample: { size: 30 } }]);
     res.status(StatusCodes.OK).json({ allCourses });
 };
 
