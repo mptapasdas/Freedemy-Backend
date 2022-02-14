@@ -1,7 +1,7 @@
 require("dotenv").config();
 require("express-async-errors");
 
-const openapi = require("./openapi.json");
+const swagger = require("./swagger.json");
 
 //extra security packages
 const helmet = require("helmet");
@@ -40,7 +40,7 @@ app.use(cors());
 app.use(xss());
 
 app.get("/swagger.json", (req, res) => {
-    res.status(200).json(openapi);
+    res.status(200).json(swagger);
 });
 
 // routes

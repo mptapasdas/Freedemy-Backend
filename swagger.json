@@ -3,21 +3,12 @@
     "info": {
         "title": "Freedemy",
         "contact": {},
-        "version": "1.0.0-oas3"
+        "version": "1.0"
     },
     "servers": [
         {
-            "url": "https://freedemy-courses.herokuapp.com/api/v1"
-        }
-    ],
-    "tags": [
-        {
-            "name": "Auth",
-            "description": ""
-        },
-        {
-            "name": "Courses",
-            "description": ""
+            "url": "https://freedemy-courses.herokuapp.com/api/v1",
+            "variables": {}
         }
     ],
     "paths": {
@@ -29,7 +20,8 @@
                 "parameters": [],
                 "responses": {
                     "200": {
-                        "description": ""
+                        "description": "",
+                        "headers": {}
                     }
                 },
                 "deprecated": false,
@@ -37,23 +29,6 @@
             }
         },
         "/favourites": {
-            "get": {
-                "tags": ["Courses"],
-                "summary": "Get All Favourite Courses",
-                "operationId": "GetAllFavouriteCourses",
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": ""
-                    }
-                },
-                "deprecated": false,
-                "security": [
-                    {
-                        "bearer": []
-                    }
-                ]
-            },
             "post": {
                 "tags": ["Courses"],
                 "summary": "Add A  Favourite Course",
@@ -81,7 +56,26 @@
                 },
                 "responses": {
                     "200": {
-                        "description": ""
+                        "description": "",
+                        "headers": {}
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "get": {
+                "tags": ["Courses"],
+                "summary": "Get All Favourite Courses",
+                "operationId": "GetAllFavouriteCourses",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "headers": {}
                     }
                 },
                 "deprecated": false,
@@ -92,19 +86,18 @@
                 ]
             }
         },
-        "/favourites/{id}": {
+        "/favourites/{code}": {
             "delete": {
                 "tags": ["Courses"],
                 "summary": "Remove A Favourite Course",
                 "operationId": "RemoveAFavouriteCourse",
                 "parameters": [
                     {
-                        "name": "id",
+                        "name": "code",
                         "in": "path",
                         "description": "",
                         "required": true,
                         "style": "simple",
-                        "explode": false,
                         "schema": {
                             "type": "string",
                             "example": "null"
@@ -113,7 +106,8 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": ""
+                        "description": "",
+                        "headers": {}
                     }
                 },
                 "deprecated": false,
@@ -124,31 +118,29 @@
                 ]
             }
         },
-        "/auth/register": {
-            "post": {
-                "tags": ["Auth"],
-                "summary": "Register User",
-                "operationId": "RegisterUser",
-                "parameters": [],
-                "requestBody": {
-                    "description": "",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/RegisterUserRequest"
-                            },
-                            "example": {
-                                "name": "tapas",
-                                "email": "tapas@gmail.com",
-                                "password": "secret"
-                            }
+        "/courses/search": {
+            "get": {
+                "tags": ["Courses"],
+                "summary": "Search Courses",
+                "operationId": "SearchCourses",
+                "parameters": [
+                    {
+                        "name": "query",
+                        "in": "query",
+                        "description": "",
+                        "required": true,
+                        "style": "form",
+                        "explode": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "python"
                         }
-                    },
-                    "required": true
-                },
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": ""
+                        "description": "",
+                        "headers": {}
                     }
                 },
                 "deprecated": false,
@@ -178,7 +170,40 @@
                 },
                 "responses": {
                     "200": {
-                        "description": ""
+                        "description": "",
+                        "headers": {}
+                    }
+                },
+                "deprecated": false,
+                "security": []
+            }
+        },
+        "/auth/register": {
+            "post": {
+                "tags": ["Auth"],
+                "summary": "Register User",
+                "operationId": "RegisterUser",
+                "parameters": [],
+                "requestBody": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RegisterUserRequest"
+                            },
+                            "example": {
+                                "name": "tapas",
+                                "email": "tapas@gmail.com",
+                                "password": "secret"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "headers": {}
                     }
                 },
                 "deprecated": false,
@@ -192,12 +217,12 @@
                 "title": "AddAFavouriteCourseRequest",
                 "required": [
                     "code",
-                    "courseurl",
+                    "title",
+                    "instructor",
                     "description",
                     "imageurl",
-                    "instructor",
-                    "tags",
-                    "title"
+                    "courseurl",
+                    "tags"
                 ],
                 "type": "object",
                 "properties": {
@@ -222,10 +247,10 @@
                     },
                     "tags": {
                         "type": "array",
-                        "description": "",
                         "items": {
                             "type": "string"
-                        }
+                        },
+                        "description": ""
                     }
                 },
                 "example": {
@@ -257,7 +282,7 @@
             },
             "RegisterUserRequest": {
                 "title": "RegisterUserRequest",
-                "required": ["email", "name", "password"],
+                "required": ["name", "email", "password"],
                 "type": "object",
                 "properties": {
                     "name": {
@@ -283,5 +308,16 @@
                 "scheme": "bearer"
             }
         }
-    }
+    },
+    "security": [],
+    "tags": [
+        {
+            "name": "Auth",
+            "description": ""
+        },
+        {
+            "name": "Courses",
+            "description": ""
+        }
+    ]
 }

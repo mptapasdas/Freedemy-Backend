@@ -23,7 +23,6 @@ const removeFavouriteCourse = async (req, res) => {
         user: { userId },
         params: { code },
     } = req;
-    console.log(req);
 
     const favCourse = await FavCourse.deleteOne(
         { code: code },
