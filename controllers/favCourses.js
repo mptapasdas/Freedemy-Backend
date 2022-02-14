@@ -21,18 +21,17 @@ const addFavouriteCourse = async (req, res) => {
 const removeFavouriteCourse = async (req, res) => {
     const {
         user: { userId },
-        params: { id: favCourseId },
+        params: { code },
     } = req;
+    console.log(req);
 
-    const favCourse = await FavCourse.findByIdAndRemove({
-        _id: favCourseId,
-        createdBy: userId,
-    });
+    const favCourse = await FavCourse.deleteOne(
+        { code: code },
+        { createdBy: userId }
+    );
 
     if (!favCourse) {
-        throw new NotFoundError(
-            `No favCourse found with favCourse id ${favCourseId}`
-        );
+        throw new NotFoundError(`No favCourse found with code ${code}`);
     }
 
     res.status(StatusCodes.OK).send("delete successful");

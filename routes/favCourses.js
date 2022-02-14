@@ -9,6 +9,6 @@ const {
 } = require("../controllers/favCourses");
 
 favCourseRouter.route("/").get(getFavouriteCourses).post(addFavouriteCourse);
-favCourseRouter.route("/:id").delete(removeFavouriteCourse);
+favCourseRouter.route("/:code").delete(removeFavouriteCourse);
 
 module.exports = favCourseRouter;
