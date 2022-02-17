@@ -9,7 +9,10 @@ const createCourse = async (req, res) => {
 
 const getAllCourses = async (req, res) => {
     const allCourses = await Course.aggregate([{ $sample: { size: 30 } }]);
-    res.status(StatusCodes.OK).json({ allCourses });
+    res.status(StatusCodes.OK).json({
+        coursesMessage: "default",
+        allCourses,
+    });
 };
 
 const editDist = (str1, str2) => {
@@ -55,7 +58,7 @@ const searchCourses = async (req, res) => {
             }
             return contains;
         });
-        return res.json({ filteredCourses });
+        return res.json({ coursesMessage: "search", filteredCourses });
     }
 
     let filteredCourses = allCourses.filter((course) => {
@@ -65,13 +68,13 @@ const searchCourses = async (req, res) => {
             let newTag = eachTag
                 .toLowerCase()
                 .substring(0, Math.min(searchValue.length, eachTag.length));
-            contains = contains || editDist(searchValue, newTag) < 2;
+            contains = contains || editDist(searchValue, newTag) < 3;
         }
 
         return contains;
     });
 
-    return res.json({ filteredCourses });
+    return res.json({ coursesMessage: "search", filteredCourses });
 };
 
 module.exports = {
