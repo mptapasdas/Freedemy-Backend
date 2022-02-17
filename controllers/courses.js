@@ -68,7 +68,7 @@ const searchCourses = async (req, res) => {
             let newTag = eachTag
                 .toLowerCase()
                 .substring(0, Math.min(searchValue.length, eachTag.length));
-            contains = contains || editDist(searchValue, newTag) < 3;
+            contains = contains || editDist(searchValue, newTag) < 2;
         }
 
         return contains;
