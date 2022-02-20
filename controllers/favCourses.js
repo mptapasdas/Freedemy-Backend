@@ -6,6 +6,9 @@ const getFavouriteCourses = async (req, res) => {
     const favouriteCourses = await FavCourse.find({
         createdBy: req.user.userId,
     }).sort("createdAt");
+
+    favouriteCourses.reverse();
+
     res.status(StatusCodes.OK).json({
         authorized: "true",
         favouriteCourses,
