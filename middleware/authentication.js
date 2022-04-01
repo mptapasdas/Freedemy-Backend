@@ -15,14 +15,13 @@ const auth = (req, res, next) => {
 
     try {
         const payload = jwt.verify(token, process.env.JWT_SECRET);
-        //ATTACH THE USER TO THE JOB ROUTE
         req.user = {
             userId: payload.userId,
             name: payload.name,
         };
         next();
     } catch (error) {
-        throw new UnauthenticatedError("Please Login Again");
+        throw new UnauthenticatedError("token error");
     }
 };
 
