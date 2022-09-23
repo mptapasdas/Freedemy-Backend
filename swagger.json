@@ -42,7 +42,7 @@
                                 "$ref": "#/components/schemas/AddAFavouriteCourseRequest"
                             },
                             "example": {
-                                "code": 14,
+                                "code": 42,
                                 "title": "Learn Ruby",
                                 "instructor": "Mike Dane",
                                 "description": "This course will give you a full introduction into all of the core concepts in ruby.",
