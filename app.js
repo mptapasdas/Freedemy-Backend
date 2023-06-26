@@ -21,7 +21,7 @@ const connectDB = require("./db/connect");
 const authRouter = require("./routes/auth");
 const coursesRouter = require("./routes/courses");
 const favCoursesRouter = require("./routes/favCourses");
-
+//version change
 // error handler
 const notFoundMiddleware = require("./middleware/not-found");
 const errorHandlerMiddleware = require("./middleware/error-handler");
