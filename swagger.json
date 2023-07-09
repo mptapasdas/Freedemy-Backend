@@ -7,7 +7,7 @@
     },
     "servers": [
         {
-            "url": "https://freedemy-courses.herokuapp.com/api/v1",
+            "url": "https://freedemy.azurewebsites.net/api/v1",
             "variables": {}
         }
     ],
