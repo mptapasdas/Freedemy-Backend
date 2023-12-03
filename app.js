@@ -41,7 +41,7 @@ app.use(cors());
 app.use(xss());
 
 app.get("/", (req, res) => {
-    res.status(200).send(`<h1>Welcome To FreeDemy API</h1>`);
+    res.status(200).send(`<h1>Welcome To FreeDemy</h1>`);
 });
 
 app.get("/swagger.json", (req, res) => {

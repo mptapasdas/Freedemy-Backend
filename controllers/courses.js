@@ -1,3 +1,5 @@
+const sgMail = require('@sendgrid/mail');
+
 const Course = require("../models/Course");
 const { StatusCodes } = require("http-status-codes");
 const { NotFoundError, BadRequestError } = require("../errors");
@@ -77,8 +79,40 @@ const searchCourses = async (req, res) => {
     return res.json({ coursesMessage: "search", filteredCourses });
 };
 
+const suggestCourse = async (req, res) => {
+  try {
+    const { email, courseName, courseDescription, instructor, courseUrl, thumbnailUrl } = req.body;
+
+    const emailBody = `
+      <h2>Course Suggestion</h2>
+      <p>Course Name: ${courseName}</p>
+      <p>Course Description: ${courseDescription}</p>
+      <p>Instructor: ${instructor}</p>
+      <p>Course URL: ${courseUrl}</p>
+      <p>Thumbnail URL: ${thumbnailUrl}</p>
+    `;
+
+    const msg = {
+      to: email,
+      from: 'mptapasdas@gmail.com',
+      subject: 'New Course Suggestion 🚀',
+      html: emailBody,
+    };
+
+    sgMail.setApiKey(process.env.SG_API_KEY);
+    await sgMail.send(msg);
+
+    res.json({ success: true, message: 'Your course suggestion has been submitted!'});
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'There was an error submitting your course suggestion.' });
+  }
+};
+
+
 module.exports = {
     createCourse,
     getAllCourses,
     searchCourses,
+    suggestCourse,
 };
