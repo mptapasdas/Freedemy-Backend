@@ -61,7 +61,13 @@ const randomCourses = async () => {
     }
 };
 
+const saveCourse = async (data) => {
+    const course = await Course.create(data);
+    return course;
+};
+
 module.exports = {
     searchByText,
     randomCourses,
+    saveCourse,
 };

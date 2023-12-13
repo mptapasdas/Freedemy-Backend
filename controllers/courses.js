@@ -1,11 +1,14 @@
-const Course = require("../models/Course");
 const { StatusCodes } = require("http-status-codes");
 const { sendSuggestionEmails } = require("../service/EmailService");
-const { searchByText, randomCourses } = require("../service/CourseService");
+const {
+    searchByText,
+    randomCourses,
+    saveCourse,
+} = require("../service/CourseService");
 
 const createCourse = async (req, res) => {
-    const course = await Course.create(req.body);
-    res.status(StatusCodes.CREATED).json(course);
+    const createCourseResponse = await saveCourse(req.body);
+    res.status(StatusCodes.CREATED).json(createCourseResponse);
 };
 
 const getAllCourses = async (req, res) => {
